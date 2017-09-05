@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ajiatech.mapper.AjiaShippingMapper" >
+<!-- 	定义结果集映射 -->
+	<resultMap type="com.ajiatech.pojo.AjiaShipping" id="BaseResultMap">
+<!-- 		定义结果集中字段名称与对象属性之间的映射关系 -->
+			<id column="add_id" property="addId" jdbcType="BIGINT"/>
+			<id column="user_id" property="userId" jdbcType="BIGINT"/>
+			<id column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
+			<id column="receiver_phone" property="receiverPhone" jdbcType="VARCHAR"/>
+			<id column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR"/>
+			<id column="receiver_state" property="receiverState" jdbcType="VARCHAR"/>
+			<id column="receiver_city" property="receiverCity" jdbcType="VARCHAR"/>
+			<id column="receiver_district" property="receiverDistrict" jdbcType="VARCHAR"/>
+			<id column="receiver_zip" property="receiverZip" jdbcType="VARCHAR"/>
+			<id column="created" property="created" jdbcType="TIMESTAMP"/>
+			<id column="updated" property="updated" jdbcType="TIMESTAMP"/>
+			<id column="status" property="status" jdbcType="TINYINT"/>
+			<id column="is_default" property="isDefault" jdbcType="TINYINT"/>
+	</resultMap>
+	<!-- 添加地址 -->
+    <insert id="insert" parameterType="com.ajiatech.pojo.AjiaShipping" >
+        insert into ajia_shipping (user_id, receiver_name, 
+      	receiver_phone, receiver_mobile, receiver_state, 
+      	receiver_city, receiver_district, receiver_address, 
+      	receiver_zip, created, updated, 
+      	status, is_default)
+        values ( #{userId}, #{receiverName}, 
+      	#{receiverPhone}, #{receiverMobile}, 	#{receiverState}, 
+      	#{receiverCity}, #{receiverDistrict}, #{receiverAddress}, 
+      	#{receiverZip}, #{created}, #{updated}, #{status}, #{isDefault})
+   </insert>
+<!--    删除地址 -->
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+   		delete from ajia_shipping where add_id=#{addId.jdbcType=BIGINT}
+   </delete>
+   
+	<!--    修改地址 -->
+	<update id="updateByPrimaryKey"  parameterType="com.ajiatech.pojo.AjiaShipping">
+		update ajia_shipping set     
+			user_id=#{userId}
+			receiver_name=#{receiverName},
+			receiver_phone=#{receiverPhone},
+			receiver_mobile=#{receiverMobile},
+			receiver_state=#{receiverState},
+			receiver_city=#{receiverCity},
+			receiver_district=#{receiverDistrict},
+			receiver_address=#{receiverAddress},
+			receiver_zip=#{receiverZip},
+			created=#{created},
+			updated=#{updated}	
+		where id = #{addId}
+	</update>
+
+	<!-- 通过id查询地址 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select add_id,user_id,receiver_name,receiver_phone,receiver_mobile,receiver_state,receiver_city,receiver_district,receiver_address,receiver_zip,created,updated,status,is_default
+		from ajia_shipping
+		where add_id=#{addId,jdbcType=BIGINT}
+	</select>
+	
+	<!-- 	通过userID查询该用户的所有地址 -->
+	<select id="selectByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from ajia_shipping where user_id=#{userId}
+	</select>
+	
+<!-- 	查询某人的默认地址 -->
+	<select id="selectDefault" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from ajia_shipping where user_id=#{userId} and is_default=1
+	</select>
+
+</mapper>

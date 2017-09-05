@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ajiatech.mapper.AjiaUserMapper">
+<!-- 	定义结果集映射 -->
+	<resultMap type="com.ajiatech.pojo.AjiaUser" id="BaseResultMap">
+<!-- 		定义结果集中字段名称与对象属性之间的映射关系 -->
+			<id column="id" property="id" jdbcType="BIGINT"/>
+			<result column="username" property="userName"/>
+			<result column="password" property="passWord"/>
+			<result column="phone" property="phone"/>
+			<result column="email" property="email"/>
+			<result column="created" property="created"/>
+			<result column="updated" property="updated"/>
+	</resultMap>
+<!-- 	查询用户 -->
+	<select id="selectByUserNameAndPwd" parameterType="com.ajiatech.pojo.AjiaUser" resultMap="BaseResultMap">
+		select id,username,password,phone,email,create,updated
+		from ajia_user
+		where username=#{userName} and password=#{passWord}
+	</select>
+	
+<!-- 	注册用户 -->
+	<insert id="insert" parameterType="com.ajiatech.pojo.AjiaUser">
+		insert into ajia_user(id,username,password,phone,email.created,updated) values(#{id},#{userName},#{passWord},#{phone},#{email},#{created},#{updated});
+	</insert>
+	
+<!-- 	修改用户信息 -->
+	<update id="updateByPrimaryKey" parameterType="com.ajiatech.pojo.AjiaUser">
+		update ajia_user set password=#{passWord},phone=#{phone},email=#{email},created=#{created},updated=#{updated}
+		where id=#{id}
+	</update>
+	
+<!-- 	删除用户信息 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from ajia_user where id=#{id}
+	</delete>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ajiatech.mapper.AjiaCollectItemMapper" >
+	<resultMap type="com.ajiatech.pojo.AjiaCollectItem" id="BaseResultMap">
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="item_id" property="itemId"/>
+		<result column="title" property="title"/>
+		<result column="price" property="price"/>
+		<result column="pic_path" property="picPath"/>
+		<result column="item_param_data" property="itemParamData"/>
+		<result column="status" property="status"/>
+		<result column="created" property="created"/>
+		<result column="updated" property="updated"/>
+	</resultMap>
+	
+	<select id ="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from ajia_collect_item where id=#{id}
+	</select>
+	
+	<select id="selectByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from ajia_collect_item where user_id =#{userId}
+	</select>
+	
+	<update id="updateByPrimaryKey" parameterType="com.ajiatech.pojo.AjiaCollectItem">
+		update ajia_collect_item set id=#{id},user_id=#{userId},item_id=#{itemId},title=#{title},price=#{price},pic_path=#{picPath},item_param_data=#{itemParamData},status=#{status},created=#{created},updated=#{updated}
+		where id=#{id}
+	</update>
+	
+	<insert id="insert" parameterType="com.ajiatech.pojo.AjiaCollectItem">
+		insert into ajia_collect_item(id,user_id,item_id,title,price,pic_path,item_param_data,status,created,updated)
+		values(#{id},#{userId},#{itemId},#{title},#{price},#{picPath},#{itemParamData},#{created},#{updated})
+	</insert>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from ajia_collect_item where id=#{id}
+	</delete>
+</mapper>

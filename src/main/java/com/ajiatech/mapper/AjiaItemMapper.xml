@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ajiatech.mapper.AjiaItemMapper" >
+	<resultMap type="com.ajiatech.pojo.AjiaItem" id="BaseResultMap">
+		<id column="id" property="id"/>
+		<result column="cid" property="cid"/>
+		<result column="brand" property="brand"/>
+		<result column="model" property="model"/>
+		<result column="title" property="title"/>
+		<result column="sell_point" property="sellPoint"/>
+		<result column="price" property="price"/>
+		<result column="num" property="num"/>
+		<result column="barcode" property="barcode"/>
+		<result column="image" property="image"/>
+		<result column="status" property="status"/>
+		<result column="created" property="created"/>
+		<result column="updated" property="updated"/>
+	</resultMap>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from ajia_item where id=#{id}
+	</select>
+	
+	<insert id="insert" parameterType="com.ajiatech.pojo.AjiaItem">
+		insert into ajia_item(id,cid,brand,model,title,sell_point,price,num,barcode,image,status,created,updated) values
+		(#{id},#{cid},#{brand},#{model},#{title},#{sellPoint},#{price},#{num},#{barcode},#{image},#{status},#{created},#{updated})
+	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="com.ajiatech.pojo.AjiaItem">
+		update ajia_item set id=#{id},cid=#{cid},brand=#{brand},model=#{model},title=#{title},sell_point=#{sellPoint},price=#{price},num=#{num},barcode=#{barcode},image=#{image},status=#{status},created=#{created},updated=#{updated}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete form ajia_item where id=#{id}
+	</delete>
+</mapper>

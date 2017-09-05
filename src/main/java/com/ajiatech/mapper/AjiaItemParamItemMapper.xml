@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ajiatech.mapper.AjiaItemParamItemMapper" >
+	<resultMap type="com.ajiatech.pojo.AjiaItemParamItem" id="BaseResultMap">
+		<id column="id" property="id"/>
+		<result column="item_id" property="itemId"/>
+		<result column="item_param_id" property="itemParamId"/>
+		<result column="param_data" property="paramData"/>
+		<result column="created" property="created"/>
+		<result column="updated" property="updated"/>
+	</resultMap>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from ajia_item_param_item where id=#{id}	
+	</select>
+	
+	<insert id="insert" parameterType="com.ajiatech.pojo.AjiaItemParamItem">
+		insert into ajia_item_param_item(id,item_id,item_param_id,param_data,updated,created) values
+		(#{id},#{itemId},#{itemParamId},#{paramData},#{updated},#{created})
+	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="com.ajiatech.pojo.AjiaItemParamItem">
+		update ajia_item_param_item set id=#{id},item_id=#{itemId},item_param_id=#{itemParamId},param_data=#{paramData},created=#{created},updated=#{updated}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from ajia_item_param_item where id=#{id}
+	</delete>
+</mapper>

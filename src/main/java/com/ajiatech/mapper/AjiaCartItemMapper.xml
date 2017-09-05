@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ajiatech.mapper.AjiaCartItemMapper" >
+	<resultMap type="com.ajiatech.pojo.AjiaCartItem" id="BaseResultMap">
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="item_id" property="itemId"/>
+		<result column="num" property="num"/>
+		<result column="status" property="status"/>
+		<result column="created" property="created"/>
+		<result column="updated" property="updated"/>
+	</resultMap>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select id,user_id,item_id,num,status,created,updated from ajia_cart_item where id=#{id}
+	</select>
+	
+	<update id="updateByPrimaryKey" parameterType="com.ajiatech.pojo.AjiaCartItem">
+		update ajia_cart_item set id=#{id},user_id=#{userId},item_id=#{itemId},num=#{num},status=#{status},created=#{created},updated=#{updated}
+		where id=#{id}
+	</update>
+	
+	<insert id="insert" parameterType="com.ajiatech.pojo.AjiaCartItem">
+		insert into ajia_cart_item(id,user_id,item_id,num,status,created,updated) values(#{id},#{userId},#{itemId},#{num},#{status},#{created},#{updated})
+	</insert>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from ajia_cart_item where id=#{id}
+	</delete>
+</mapper>

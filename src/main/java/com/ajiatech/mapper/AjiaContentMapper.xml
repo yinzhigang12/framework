@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ajiatech.mapper.AjiaContentMapper" >
+	<resultMap type="com.ajiatech.pojo.AjiaContent" id="BaseResultMap">
+		<id column="id" property="id"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="title" property="title"/>
+		<result column="sub_title" property="subTitle"/>
+		<result column="title_desc" property="titleDesc"/>
+		<result column="url" property="url"/>
+		<result column="pic" property="pic"/>
+		<result column="pic2" property="pic2"/>
+		<result column="content" property="content"/>
+		<result column="status" property="status"/>
+		<result column="created" property="created"/>
+		<result column="updated" property="updated"/>
+	</resultMap>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from ajia_content where id=#{id}
+	</select>
+	
+	<insert id="insert" parameterType="com.ajiatech.pojo.AjiaContent">
+		insert into ajia_content(id,category_id,title,sub_title,title_desc,url,pic,pic2,content,status,created,updated) values
+		(#{id},#{categoryId},#{title},#{subTitle},#{titleDesc},#{url},#{pic},#{pic2},#{content},#{status},#{created},#{updated})
+	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="com.ajiatech.pojo.AjiaContent">
+		update ajia_content set id=#{id},category_id=#{categoryId},title=#{title},sub_title=#{subTitle},title_desc=#{titleDesc},url=#{url},pic=#{pic},pic2=#{pic2},content=#{content},status=#{status},created=#{created},updated=#{updated}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from ajia_content where id=#{id}
+	</delete>
+</mapper>
